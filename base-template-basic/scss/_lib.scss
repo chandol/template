@@ -1,0 +1,83 @@
+.hidden {display: none !important; visibility: hidden;}
+@mixin hidden {display: none !important; visibility: hidden;}
+
+.invisible {visibility: hidden;}
+@mixin invisible {visibility: hidden;}
+
+.clearfix:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+@mixin clearfix {
+	&:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+}
+
+.left {float: left;}
+@mixin left {float: left;}
+
+.right {float: right;}
+@mixin right {float: right;}
+
+@mixin ease($sec: .25s) {
+	-webkit-transition: all $sec ease-in-out;
+	-moz-transition: all $sec ease-in-out;
+	-o-transition: all $sec ease-in-out;
+	-webkit-transition: all $sec ease-in-out;
+	transition: all $sec ease-in-out;
+}
+
+@function strip-unit($num) {
+	@return $num / ($num * 0 + 1);
+}
+
+@mixin rem($property, $values...) {
+	$max: length($values);
+	$pxValues: '';
+	$remValues: '';
+
+	@for $i from 1 through $max {
+		$value: strip-unit(nth($values, $i));
+		$pxValues: #{$pxValues + $value * strip-unit($unit_px)}px;
+
+		@if $i < $max {
+			$pxValues: #{$pxValues + " "};
+		}
+	}
+
+	@for $i from 1 through $max {
+		$value: strip-unit(nth($values, $i));
+		$remValues: #{$remValues + $value}rem;
+
+		@if $i < $max {
+			$remValues: #{$remValues + " "};
+		}
+	}
+
+	#{$property}: $pxValues;
+	#{$property}: $remValues;
+}
+
+@mixin col($span: 12, $left: 0, $right: 0, $min_width: -1, $max_width: -1) {
+
+	width: percentage($span / 12);
+	margin-left: percentage($left / 12);
+	margin-right: percentage($right / 12);
+
+	@if $min_width > 0 {
+		@include rem (min-width, $min_width);
+	}
+
+	@if $max_width > 0 {
+		@include rem (max-width, $max_width);
+	}
+}
+
+@mixin inner-wrapper($margin_rem: 0.625rem) {
+	@include rem(margin, 0, $margin_rem);
+}
+.inner-wrapper {@include inner-wrapper;}

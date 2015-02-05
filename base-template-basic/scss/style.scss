@@ -1,0 +1,42 @@
+$unit_px: 16px;
+
+@import "normalize";
+@import "lib";
+
+*, *:before, *:after {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+$color_txt: #333;
+$color_wht: #fff;
+$color_emp: #000;
+
+html {
+
+	font-family: Helvetica, sans-serif;
+	@include rem(font-size, 1rem);
+
+	img {vertical-align:middle;}
+	input:focus {outline:none;}
+	ol, ul, li {list-style:none;}
+
+	::-moz-selection {text-shadow:none;color:$color_wht;background:$color_txt;}
+	::selection {text-shadow:none;color:$color_wht;background:$color_txt;}
+
+	a {
+		@include ease;
+
+		text-decoration: none;
+		color: $color_txt;
+
+		&:hover {
+			color: $color_emp;
+		}
+	}
+
+	body {
+
+	}
+}
