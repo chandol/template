@@ -1,3 +1,8 @@
+**=== 0.2.1 (February 22, 2015)**
+
+* Fix style.scss syntax error.
+* Change SASS folder name from 'scss' to 'sass'.
+
 **=== 0.2.0 (February 22, 2015)**
 
 * Add Font Awesome.
