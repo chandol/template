@@ -1,7 +1,8 @@
 $unit_px: 16px;
 
-@import "normalize";
-@import "lib";
+@import 'normalize';
+@import 'lib';
+@import 'font-awesome'
 
 *, *:before, *:after {
 	box-sizing: border-box;
