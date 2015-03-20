@@ -1,0 +1,137 @@
+@mixin hidden {display: none !important; visibility: hidden;}
+.hidden {@include hidden;}
+
+@mixin invisible {visibility: hidden;}
+.invisible {@include invisible;}
+
+.cf:after {
+	content: '';
+	display: table;
+	clear: both;
+}
+@mixin cf {
+	&:after {
+		content: '';
+		display: table;
+		clear: both;
+	}
+}
+
+@mixin ease($sec: .25s) {
+	-webkit-transition: all $sec ease-in-out;
+	-moz-transition: all $sec ease-in-out;
+	-o-transition: all $sec ease-in-out;
+	-webkit-transition: all $sec ease-in-out;
+	transition: all $sec ease-in-out;
+}
+
+@function strip-unit($num) {
+	@return $num / ($num * 0 + 1);
+}
+
+@mixin rem($property, $vals...) {
+
+	$n: length($vals);
+	$pxs: '';
+	$rems: '';
+
+	@for $i from 1 through $n {
+
+		$val: strip-unit(nth($vals, $i));
+
+		$pxs: #{$pxs + $val*strip-unit($unit_px)}px;
+		$rems: #{$rems + $val}rem;
+
+		@if $i < $n {
+			$pxs: #{$pxs + ' '};
+			$rems: #{$rems + ' '};
+		}
+	}
+
+	#{$property}: $pxs;
+	#{$property}: $rems;
+}
+
+@mixin px($property, $vals...) {
+
+	$n: length($vals);
+	$pxs: '';
+	$rems: '';
+
+	@for $i from 1 through $n {
+
+		$val: strip-unit(nth($vals, $i));
+
+		$pxs: #{$pxs + $val}px;
+		$rems: #{$rems + $val/strip-unit($unit_px)}rem;
+
+		@if $i < $n {
+			$pxs: #{$pxs + ' '};
+			$rems: #{$rems + ' '};
+		}
+	}
+
+	#{$property}: $pxs;
+	#{$property}: $rems;
+}
+
+@mixin col($span: 12, $float: none, $left: 0, $right: 0, $min_width: -1, $max_width: -1) {
+
+	width: percentage($span / 12);
+	float: $float;
+	margin-left: percentage($left / 12);
+	margin-right: percentage($right / 12);
+
+	@if $min_width > 0 {
+		@include rem(min-width, $min_width);
+	}
+
+	@if $max_width > 0 {
+		@include rem(max-width, $max_width);
+	}
+}
+
+@mixin gutter($margin_rem: 1) { @include rem(margin, 0, $margin_rem); }
+
+@mixin inwrap($margin_rem: 1) { @include rem(margin, $margin_rem); }
+
+.gutter {@include gutter;}
+.inwrap {@include inwrap;}
+
+@mixin rotate($angle: 45deg, $origin: 50% 50%) {
+	-webkit-transform: rotate($angle); /* Safari and Chrome */
+	-moz-transform: rotate($angle);   /* Firefox */
+	-ms-transform: rotate($angle);   /* IE 9 */
+	-o-transform: rotate($angle);   /* Opera */
+	transform: rotate($angle);
+
+	-webkit-transform-origin: $origin;
+	-moz-transform-origin: $origin;
+	-ms-transform-origin: $origin;
+	-o-transform-origin: $origin;
+	transform-origin: $origin;
+}
+
+@mixin box-shadow($shadow_size: 0px 3px 10px 3px, $color: rgba(0,0,0,0.75)) {
+	-webkit-box-shadow: $shadow_size $color;
+	-moz-box-shadow: $shadow_size $color;
+	box-shadow: $shadow_size $color;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

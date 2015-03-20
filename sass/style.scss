@@ -1,8 +1,8 @@
 $unit_px: 16px;
 
-@import 'normalize';
-@import 'lib';
-@import 'font-awesome';
+@import 'libs/normalize';
+@import 'libs/lib';
+@import 'libs/font-awesome';
 
 *, *:before, *:after {
 	box-sizing: border-box;
@@ -12,6 +12,7 @@ $unit_px: 16px;
 
 $color_txt: #333;
 $color_wht: #fff;
+$color_grey: #808080;
 $color_emp: #000;
 
 html {
@@ -28,16 +29,17 @@ html {
 
 	a {
 		@include ease;
-
+		display: block;
 		text-decoration: none;
 		color: $color_txt;
-
-		&:hover {
-			color: $color_emp;
-		}
+		&:hover {color: $color_emp;}
 	}
 
 	body {
 
+		margin: 0;
+		padding: 0;
+
+		.wrapper {}
 	}
 }
